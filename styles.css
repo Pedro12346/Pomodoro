@@ -1,0 +1,79 @@
+body {
+  text-align: center;
+  background-color:#42296c;
+  margin: 0;
+}
+
+/*headings*/
+.section-heading {
+  font-size: 2rem;
+  color: #DCDCDC;
+  margin: 3% 0;
+}
+
+/*Header section*/
+
+.header {
+  margin: 0;
+  padding: 1rem 0 0 0;
+  background-color: #201434;
+}
+
+.main-title {
+  color: white;
+  font-family: arial, sans-serif;
+  font-size: 2rem;
+  margin: 0;
+  text-align: center;
+}
+
+.nav-item {
+  margin: 0.5rem;
+}
+
+/*History section*/
+.table {
+  background-color: #708090;
+  color: white;
+}
+
+/*main*/
+
+#time-remaining-text {
+  color: #F5F5DC;
+  font-size: 4rem;
+  margin: 3% 0;
+}
+
+.progress {
+  margin: 3% 0;
+}
+
+.time-button {
+  margin: 3% 0;
+}
+
+.cancel-time-button {
+  margin: 3% 0;
+  display: none;
+}
+
+.modal-content {
+  background-color: #42296c;
+  color: white;
+  text-align: left;
+}
+
+.modal-close-button {
+  color: white;
+}
+/*today section*/
+
+.today-section {
+  background-color: #191970;
+}
+
+.today-body {
+  color: white;
+  text-align: left;
+}

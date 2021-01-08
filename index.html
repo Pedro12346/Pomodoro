@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pomodoro App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <div class="header container-fluid">
+      <h1 class="main-title">Pomodoro Timer</h1>
+      <nav class="navbar navbar-expand-lg navbar-expand-md">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-options" aria-controls="navbar-options" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-options">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#sessionModal">Session Settings</button>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#historyModal">History</button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+
+    <div class="main container-fluid">
+      <div class="row">
+
+        <div class="col-lg-9 col-md-9">
+          <h2 class="section-heading time-session-title">Time Remaining</h2>
+          <div id="time-remaining-text"></div>
+          <button type="button" class="time-button btn btn-primary btn-lg btn-block">Start</button>
+          <button type="button" class="cancel-time-button btn btn-danger btn-lg btn-block">Cancel Timer</button>
+        </div>
+
+        <div class="today-section col-lg-3 col-md-3">
+          <h2 class="section-heading">Today</h2>
+          <div class="today-body">
+            <p>Pomodoros completed: <span class="pomodoros-completed-today"></span> </p>
+            <p>Minutes spent: <span class="minutes-spent-today"></span> </p>
+            <p>Last pomodoro completed: <span class="last-completed-today"></span> </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="sessionModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Session Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="modal-close-button" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <form id="settings-form">
+                <label for="numberOfPodomorosPerSession">Number of pomodoros per session</label>
+                <select class="form-control" id="numberOfPodomorosPerSession">
+                  <option class="select-1">1</option>
+                  <option class="select-2">2</option>
+                  <option class="select-3">3</option>
+                  <option class="select-4">4</option>
+                  <option class="select-5">5</option>
+                  <option class="select-6">6</option>
+                  <option class="select-7">7</option>
+                  <option class="select-8">8</option>
+                </select>
+
+                <label for="timePerPomodoro">Time per pomodoro(in minutes)</label>
+                <input type="number" min="1" class="form-control" id="timePerPomodoro" placeholder="25">
+
+                <label for="breakTime">Break Time between pomodoros(in minutes)</label>
+                <input type="number" min="1" class="form-control" id="breakTime" placeholder="5">
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" id="save-settings-changes" data-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="historyModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">History</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="modal-close-button" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Finished At</th>
+                  <th>Duration(In Minutes)</th>
+                </tr>
+              </thead>
+
+              <tbody class = "history-table-body">
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="sessionCompletedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Session Finished!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="modal-close-button" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-block" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js" type="text/javascript"></script>
+  </body>
+</html>
